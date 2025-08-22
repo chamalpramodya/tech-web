@@ -36,5 +36,5 @@ jobs:
               --distribution-id "$CLOUDFRONT_ID" \
               --paths "/*"
           else
-            echo "No CLOUDFRONT_ID provided, skipping invalidation."
+            echo "No CLOUDFRONT_ID secret found, skipping invalidation."
           fi
