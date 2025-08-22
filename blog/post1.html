@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AWS S3 + CloudFront Guide - Chamal's Tech Blog</title>
+  <link rel="stylesheet" href="../css/style.css">
+  <style>
+    /* Hero Banner */
+    .hero-post {
+      background: linear-gradient(rgba(13,17,23,0.8), rgba(13,17,23,0.9)),
+                  url('../images/tech-bg.jpg') no-repeat center/cover;
+      text-align: center;
+      padding: 6rem 2rem;
+      color: #fff;
+      animation: fadeIn 1.5s ease-in-out;
+    }
+    .hero-post h1 {
+      font-size: 2.8rem;
+      margin-bottom: 1rem;
+    }
+    .hero-post p {
+      font-size: 1.1rem;
+      color: #c9d1d9;
+    }
+
+    /* Article */
+    article {
+      animation: fadeUp 1s ease-in-out;
+    }
+    article h2 {
+      color: #58a6ff;
+      margin-top: 2rem;
+    }
+    article h3 {
+      margin-top: 1.5rem;
+      color: #1f6feb;
+    }
+    article ul li {
+      margin-bottom: 0.5rem;
+    }
+
+    /* Images */
+    .img-card {
+      margin: 1.5rem 0;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+      transition: transform 0.3s ease;
+    }
+    .img-card:hover {
+      transform: scale(1.02);
+    }
+    .img-card img {
+      width: 100%;
+      display: block;
+    }
+
+    /* Code Block */
+    code {
+      background: #161b22;
+      color: #58a6ff;
+      padding: 0.2rem 0.4rem;
+      border-radius: 4px;
+      font-family: monospace;
+    }
+
+    /* Tip Box */
+    blockquote {
+      background: #161b22;
+      border-left: 4px solid #58a6ff;
+      padding: 1rem;
+      margin: 1.5rem 0;
+      color: #c9d1d9;
+      border-radius: 6px;
+      font-style: italic;
+    }
+
+    /* Animations */
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body>
+  <header class="navbar">
+    <div class="logo">⚡ Chamal</div>
+    <nav>
+      <a href="../index.html">Home</a>
+      <a href="../blog/post1.html" class="active">Blog</a>
+      <a href="../about.html">About</a>
+      <a href="../contact.html">Contact</a>
+    </nav>
+  </header>
+
+  <!-- Hero Banner -->
+  <section class="hero-post">
+    <h1>🚀 Getting Started with AWS S3 & CloudFront</h1>
+    <p><em>Published: Aug 21, 2025 | Category: Cloud Hosting</em></p>
+  </section>
+
+  <!-- Article -->
+  <main class="container">
+    <article>
+      <p>
+        Hosting a static website on AWS is simpler than you think.  
+        With <strong>Amazon S3</strong> for storage and <strong>CloudFront</strong> for global delivery, 
+        you can set up a fast, reliable, and secure website for just a few cents per month.
+      </p>
+
+      <div class="img-card">
+        <img src="../images/aws-architecture.png" alt="AWS S3 + CloudFront architecture diagram">
+      </div>
+
+      <h2>Why use S3 + CloudFront?</h2>
+      <ul>
+        <li>📦 <strong>Scalable storage</strong> – S3 can handle unlimited files.</li>
+        <li>⚡ <strong>Global CDN</strong> – CloudFront delivers your site faster from edge locations.</li>
+        <li>🔒 <strong>Free SSL/TLS</strong> – Secure your site with HTTPS.</li>
+        <li>💰 <strong>Cheap hosting</strong> – Costs less than $1/month for small sites.</li>
+      </ul>
+
+      <h2>Step-by-Step Guide</h2>
+
+      <h3>1. Create an S3 Bucket</h3>
+      <p>
+        Log in to your AWS console and create a new S3 bucket.  
+        <strong>Important:</strong> Use the same name as your domain if you plan to connect one 
+        (e.g., <code>mycoolsite.com</code>).
+      </p>
+      <div class="img-card">
+        <img src="../images/create-s3-bucket.png" alt="Create S3 bucket screenshot">
+      </div>
+
+      <h3>2. Upload Your Website Files</h3>
+      <p>
+        Drag and drop your <code>index.html</code>, <code>style.css</code>, and assets (images, JS files) into the bucket.
+      </p>
+      <div class="img-card">
+        <img src="../images/upload-s3-files.png" alt="Upload website files to S3">
+      </div>
+
+      <h3>3. Enable Static Website Hosting</h3>
+      <p>
+        Under your bucket’s properties, enable <strong>Static website hosting</strong>.  
+        Specify <code>index.html</code> as the index document.
+      </p>
+      <blockquote>
+        💡 Tip: Your S3 site will be live at:  
+        <code>http://mycoolsite.s3-website-us-east-1.amazonaws.com</code>
+      </blockquote>
+
+      <h3>4. Secure with CloudFront + SSL</h3>
+      <p>
+        Create a CloudFront distribution and point it to your S3 bucket.  
+        Request a free certificate via <strong>AWS Certificate Manager (ACM)</strong> 
+        and attach it for HTTPS.
+      </p>
+      <div class="img-card">
+        <img src="../images/cloudfront-settings.png" alt="CloudFront distribution settings">
+      </div>
+
+      <h3>5. Add a Custom Domain (Optional)</h3>
+      <p>
+        If you own a domain, use Route 53 (or your registrar’s DNS) to point 
+        <code>www.yourdomain.com</code> to CloudFront.
+      </p>
+
+      <h2>🎥 Video Walkthrough</h2>
+      <ul>
+        <li><a href="https://www.youtube.com/watch?v=lmULm2VH7DU" target="_blank">Host a Static Website on AWS S3 + CloudFront (YouTube)</a></li>
+        <li><a href="https://www.youtube.com/watch?v=ZkR3mQ2mbnY" target="_blank">Step-by-Step Setup Guide</a></li>
+      </ul>
+
+      <h2>✨ Final Thoughts</h2>
+      <p>
+        With just a few steps, you’ve set up a production-ready static website on AWS.  
+        The best part? It scales automatically and costs almost nothing.  
+      </p>
+
+      <p>💬 Have questions? Drop a comment below ⬇️</p>
+    </article>
+  </main>
+
+  <footer>
+    <p>© 2025 Chamal's Tech Blog</p>
+  </footer>
+</body>
+</html>
